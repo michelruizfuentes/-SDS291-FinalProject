@@ -127,9 +127,37 @@ research_data %>%
 
 When we plotted the histogram for the funding amount, the highest funding amounts were private equity and unknown and they skewed our distribution significantly. Since private equity is not a funding stage and the unknowns do not bring insights, we can remove these two funding stages from our data without creating bias. This reduced the skewness of the distribution.
 
+```{r, fig3, fig.height = 4, fig.width = 6, fig.align = "center"}
+research_data <- research_data %>%
+  filter(!`Funding Stage` == "Unknown") %>%
+  filter(!`Funding Stage` == "Private Equity") 
+research_data %>%
+  ggplot(aes(x = funding_amount)) +
+  geom_histogram() + 
+  labs(
+    title = "Distribution of Funding Amount",
+    subtitle = "Removing Private Equity and Unknown",
+    x = "Funding Amount (in USD)",
+    y = "Count"
+  ) +
+  scale_x_continuous(labels = scales::dollar)
+```
+
 However, after we removed private equity and unknown data, the data is still skewed. So we will transform funding amount values in an attempt to have a uniform distribution. We used two approaches: standardization and log transformation.
 
 First, we standardized the funding amount because it helps us interpret the intercept in a more sensible way and allows us to look at the funding amount in terms of standard deviation from the mean. Next, we conducted a log transformation of the funding amount to scale the magnitude of our data and transform the data to be more linear.
+
+```{r}
+#standardized-dv
+
+research_data$funding_amt_std <- scale(research_data$funding_amount, center = T, scale = T)
+```
+
+```{r}
+#log-dv
+
+research_data$funding_amt_log <- log(research_data$funding_amount)
+```
 
 After viewing the transformation plots above, we found that there was a more uniform distribution for funding amount in the log transformation thereby having less of a skew and more linear. We did not perform the power transformation because we were satisfied with the uniform distribution for the funding amount produced by the log transformation.
 
