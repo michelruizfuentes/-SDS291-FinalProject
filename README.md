@@ -1,11 +1,9 @@
 # Assessing the Impacts of Economic Factors on Funding for Tech Startups in North America
 
 
-• Nana Adjoa Ansah, Parunjodhi Munisamy, Michel Ruiz-Fuentes
-
-• SDS291 Multiple Regression
-
-• 3 May 2022
+- Nana Adjoa Ansah, Parunjodhi Munisamy, Michel Ruiz-Fuentes
+- SDS291 Multiple Regression
+- 3 May 2022
 
 ## Abstract
 
