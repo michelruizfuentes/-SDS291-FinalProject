@@ -9,27 +9,6 @@
 
 Our analysis aims to investigate the correlation between the funding stage of a tech startup (Series C or not), the GDP per capita of the country the startup is based in, and the funding amount they receive from a given investor. Our data comes from the WorldBank, a Continents CSV and a Kaggle dataset compiling startup information from TechCrunch, Crunchbase, etc. We combined the datasets to conduct a multiple regression analysis investigating the correlation between the variables listed above for tech startups in North America. This subject is fascinating because startup companies are crucial for the growth of a country’s economy. Our research could provide insightful findings that are relevant to all of us because we benefit from more startups that produce a healthier economy. We find that GDP per capita has a positive linear relationship with funding amounts and companies in Series C have more funding amount than the other funding stage.
 
-```{r setup, include=FALSE}
-#setting parameters
-knitr::opts_chunk$set(fig.width=12, fig.height=8,
-                      echo = FALSE,
-                      warning = FALSE,
-                      message = FALSE)
-```
-
-```{r setup, include=FALSE}
-#loading libraries
-library(tidyverse)
-library(broom)
-library(ggplot2)
-library(rio)
-library(ggpubr)
-library(moderndive)
-library(car)
-library(stargazer)
-library(vtable)
-```
-
 ## Introduction
 
 Our team is investigating the research question:
@@ -59,14 +38,39 @@ the funding amount.
 # Methods
 
 ```{r setup, include=FALSE}
+#setting parameters
+
+knitr::opts_chunk$set(fig.width=12, fig.height=8,
+                      echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
+```
+
+```{r}
+#loading libraries
+
+library(tidyverse)
+library(broom)
+library(ggplot2)
+library(rio)
+library(ggpubr)
+library(moderndive)
+library(car)
+library(stargazer)
+library(vtable)
+```
+
+```{r}
 #loading-the-data
+
 tech_data <- import("tech_fundings.csv")
 world_data <- import("world_data_filtered.csv")
 continent_data <- import("continents.csv")
 ```
 
-```{r setup, include=FALSE}
+```{r}
 #wrangling-and-cleaning-data
+
 world_data$Country <- world_data$`Country Name`
 world_data <- world_data %>%
   full_join(continent_data) %>%
@@ -97,6 +101,29 @@ Additionally, one last data wrangle we performed was assigning each country a co
 Backed by the above background and literature analysis, the variables that we are emphasizing on in our models are:
 
 1) Funding amount which is our dependent variable with unit USD. It is a continuous variable. When plotting a histogram of this parameter, the distribution is found to be very right skewed.
+
+```{r}
+#dependent-variable
+#https://stackoverflow.com/questions/6386314/how-do-i-get-discrete-factor-levels-to-be-treated-as-continuous
+
+research_data$`funding_amount` <- as.numeric(as.character(research_data$`Funding Amount (USD)`))
+```
+
+
+```{r, fig2, fig.height = 4, fig.width = 6, fig.align = "center"}
+#dependent-variable
+
+research_data %>%
+  ggplot(aes(x = funding_amount)) +
+  geom_histogram() + 
+  labs(
+    title = "Distribution of Funding Amount",
+    subtitle = "Containing all Funding Stages",
+    x = "Funding Amount (in USD)",
+    y = "Count"
+  ) +
+  scale_x_continuous(labels = scales::dollar)
+```
 
 When we plotted the histogram for the funding amount, the highest funding amounts were private equity and unknown and they skewed our distribution significantly. Since private equity is not a funding stage and the unknowns do not bring insights, we can remove these two funding stages from our data without creating bias. This reduced the skewness of the distribution.
 
