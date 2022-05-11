@@ -37,6 +37,25 @@ the funding amount.
 
 # Methods
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.width=12, fig.height=8,
+                      echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
+```
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(broom)
+library(ggplot2)
+library(rio)
+library(ggpubr)
+library(moderndive)
+library(car)
+library(stargazer)
+library(vtable)
+```
+
 ## Data
 
 Our main dataset is Tech Company Fundings. The dataset owner is Shivam Bansal, an experienced data scientist who has won multiple Kaggle Analytics Competitions. They are active on Kaggle with numerous datasets in their toolkit.It consists of 3575 observations with 8 variables looking at different features of the tech company. Out of these 8 variables, we choose to focus on funding amount (key dependent variable), funding stage (key independent variable), vertical (independent variable) and region the company is based in. Its unit of analysis is a unique tech company.
