@@ -17,26 +17,6 @@ How the funding amount a tech company receives is affected by the GDP per capita
 
 We are assessing the correlation between the funding amount (startups receive from investors) and eco- nomic variables that can reveal trends that help tech startups raise capital and boost the country’s economy. Furthermore, our research could show what economic factors contribute to the likelihood of tech companies receiving funding from investors. We are modeling our data with the intent to: classify, summarize patterns, and test a theory. First, we would like to classify what variables positively correlate with the funding amount that tech startups receive. Then, we will summarize our trends, and lastly, we will test the theory that Series C stage companies are more likely to receive funding from investors.
 
-## Background and Significance
-
-As ventures or young and growing companies, these startups must gather capital to develop with their ideas. This funding will come from investors like venture capitalists, banks, hedge funds, or high net-worth individuals. The funding amount offered by an investor is based on several factors: their level of interest in the market, the company’s valuation, and what the current funding stage reveals about the startup’s growth potential. Each funding stage possesses distinct characteristics that demonstrate the company’s track record and risk, hence its Valuation score. In our data analysis, we will investigate how the funding stage of a company affects the funding amount they receive from an investor.
-
-Our first key variable will investigate if being Series C stage company has a moderating effect on the funding amount a startup receives. Series C companies are thriving businesses in their markets. They are lower risk and have consistent revenue from customers purchasing their products and services. When a Series C company is looking for an investor to provide funding, its objective is to expand to new markets and acquire other companies (“How the Stock Market Affects GDP” n.d.). Due to their reputation of success, they are more attractive and viable investments. When investors invest in a Series C company, they benefit from a high investment appreciation due to the successful nature of being a Series C startup (“LEF 2021 – Liberec Economic Forum” n.d.). Therefore we believe focusing on whether or not a company is in the Series C stage will be the most insightful.
-
-Our second key variable explores whether the GDP per capita of the country the startup is based in affects the funding amount they will receive from an investor. Based on prior research, we found that a stronger GDP per capita allows for more venture opportunities. When a country’s economy is well-developed, investors have more discretionary funding, which leads to higher levels of investment and the emergence of more fintech startups, with venture capital being readily available (Haddad and Hornuf 2019). With an increasing developing economy of a country, there is a higher likelihood of individuals needing financial services such as asset management. As a result, the stock markets of such countries become active, inadvertently having a positive influence on tech startup formations and supporting the prosperity of venture capital and entrepreneurship (Black and Gilson, 1999). With stock prices rising, investors and consumers have more wealth and optimism about future prospects. Eventually, there are increased sales and earnings for corporations, further boosting the GDP per capita of the country (“How the Stock Market Affects GDP” n.d.).
-
-As mentioned above, we will investigate the impacts of being a Series C stage company and the GDP per capita of the country the company is based in. We are interested in the relationship between these two factors because established financial markets are often key determinants to providing Series C funding to startup tech companies. Better financial markets would lead to economic growth and, therefore, GDP per capita in the country. Through the tremendous improvements in technology that blossom from the tech startups, there are robust boosts in the economic development of a country (“Financial Development” n.d.). Consequently, since a more stable and stronger financial structure is positively associated with economic growth (Prochniak and Wasiak 2017), holding everything else constant, on average, a company based in a country where the GDP per capita is high is more likely to be associated with being in the Series C funding stage because there would be more funding available for them to invest in.
-
-## Hypothesis
-
-Therefore, our two alternate hypothesis are:
-
-1) We expect that when the GDP per capita of the country the startup is based in increases, so does
-the funding amount.
-2) We expect that the GDP per capita of the country the startup is based in and funding amount will increase significantly if the startup is in the Series C funding stage.
-
-# Methods
-
 ```{r setup, include=FALSE}
 #setting parameters
 knitr::opts_chunk$set(fig.width=12, fig.height=8,
@@ -57,6 +37,33 @@ library(car)
 library(stargazer)
 library(vtable)
 ```
+
+## Background and Significance
+
+As ventures or young and growing companies, these startups must gather capital to develop with their ideas. This funding will come from investors like venture capitalists, banks, hedge funds, or high net-worth individuals. The funding amount offered by an investor is based on several factors: their level of interest in the market, the company’s valuation, and what the current funding stage reveals about the startup’s growth potential. Each funding stage possesses distinct characteristics that demonstrate the company’s track record and risk, hence its Valuation score. In our data analysis, we will investigate how the funding stage of a company affects the funding amount they receive from an investor.
+
+Our first key variable will investigate if being Series C stage company has a moderating effect on the funding amount a startup receives. Series C companies are thriving businesses in their markets. They are lower risk and have consistent revenue from customers purchasing their products and services. When a Series C company is looking for an investor to provide funding, its objective is to expand to new markets and acquire other companies (“How the Stock Market Affects GDP” n.d.). Due to their reputation of success, they are more attractive and viable investments. When investors invest in a Series C company, they benefit from a high investment appreciation due to the successful nature of being a Series C startup (“LEF 2021 – Liberec Economic Forum” n.d.). Therefore we believe focusing on whether or not a company is in the Series C stage will be the most insightful.
+
+Our second key variable explores whether the GDP per capita of the country the startup is based in affects the funding amount they will receive from an investor. Based on prior research, we found that a stronger GDP per capita allows for more venture opportunities. When a country’s economy is well-developed, investors have more discretionary funding, which leads to higher levels of investment and the emergence of more fintech startups, with venture capital being readily available (Haddad and Hornuf 2019). With an increasing developing economy of a country, there is a higher likelihood of individuals needing financial services such as asset management. As a result, the stock markets of such countries become active, inadvertently having a positive influence on tech startup formations and supporting the prosperity of venture capital and entrepreneurship (Black and Gilson, 1999). With stock prices rising, investors and consumers have more wealth and optimism about future prospects. Eventually, there are increased sales and earnings for corporations, further boosting the GDP per capita of the country (“How the Stock Market Affects GDP” n.d.).
+
+As mentioned above, we will investigate the impacts of being a Series C stage company and the GDP per capita of the country the company is based in. We are interested in the relationship between these two factors because established financial markets are often key determinants to providing Series C funding to startup tech companies. Better financial markets would lead to economic growth and, therefore, GDP per capita in the country. Through the tremendous improvements in technology that blossom from the tech startups, there are robust boosts in the economic development of a country (“Financial Development” n.d.). Consequently, since a more stable and stronger financial structure is positively associated with economic growth (Prochniak and Wasiak 2017), holding everything else constant, on average, a company based in a country where the GDP per capita is high is more likely to be associated with being in the Series C funding stage because there would be more funding available for them to invest in.
+
+```{r setup, include=FALSE}
+#loading the data
+tech_data <- import("tech_fundings.csv")
+world_data <- import("world_data_filtered.csv")
+continent_data <- import("continents.csv")
+```
+
+## Hypothesis
+
+Therefore, our two alternate hypothesis are:
+
+1) We expect that when the GDP per capita of the country the startup is based in increases, so does
+the funding amount.
+2) We expect that the GDP per capita of the country the startup is based in and funding amount will increase significantly if the startup is in the Series C funding stage.
+
+# Methods
 
 ## Data
 
