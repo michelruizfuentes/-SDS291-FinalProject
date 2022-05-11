@@ -1,4 +1,4 @@
-# Assessing the Impacts of Economic Factors on Funding for Tech Startups
+# Assessing the Impacts of Economic Factors on Funding for Tech Startups in North America
 
 
 • Nana Adjoa Ansah, Parunjodhi Munisamy, Michel Ruiz-Fuentes
@@ -109,7 +109,7 @@ To summarize our results, we can hold other variables other than our key variabl
 
 Looking at how GDP per capita can predict funding amount of a company based on whether it is Series C company or not, we can look at the graph above showcasing the predicted funding amount with GDP per Capita in thousands USD. Holding everything else constant, the general trend observed is that as GDP per capita increases, the tech company is predicted to receive more funding, more so if the company is in the series C funding stage than not. This is in agreement with our first hypothesis that states that there is a significant association between the GDP per capita of the country the company is based in and the funding amount for a company regardless of whether the company is Series C or not.
 
-# Conclusion
+## Conclusion
 
 The question we are addressing in this paper is how much funding does a tech company receive based on the GDP per capita of the country it is based in and whether it is in the Series C funding stage or not. We conducted a multiple regression analysis looking at both a parallel slope and interaction models. We found that the parallel slopes model looking at GDP per capita and whether the company is in series C or not the best fit while accounting for population of the country the tech company is in, the region the company is in and whether the company is a B2B software or not has the best goodness of fit for out data. Therefore, there is more evidence to support the alternate hypothesis that there is a significant association between the GDP per capita of the country the company is based in and the funding amount for a company regardless of whether the company is Series C or not. Holding everything else constant, there is a linear positive relationship between GDP per capita and funding amount, both in USD. Moreover, on average, companies in the Series C funding stage receive more funding than those which are not.
 
