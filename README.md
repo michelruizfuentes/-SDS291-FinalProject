@@ -109,7 +109,7 @@ To summarize our results, we can hold other variables other than our key variabl
 
 Looking at how GDP per capita can predict funding amount of a company based on whether it is Series C company or not, we can look at the graph above showcasing the predicted funding amount with GDP per Capita in thousands USD. Holding everything else constant, the general trend observed is that as GDP per capita increases, the tech company is predicted to receive more funding, more so if the company is in the series C funding stage than not. This is in agreement with our first hypothesis that states that there is a significant association between the GDP per capita of the country the company is based in and the funding amount for a company regardless of whether the company is Series C or not.
 
-## Conclusion
+# Conclusion
 
 The question we are addressing in this paper is how much funding does a tech company receive based on the GDP per capita of the country it is based in and whether it is in the Series C funding stage or not. We conducted a multiple regression analysis looking at both a parallel slope and interaction models. We found that the parallel slopes model looking at GDP per capita and whether the company is in series C or not the best fit while accounting for population of the country the tech company is in, the region the company is in and whether the company is a B2B software or not has the best goodness of fit for out data. Therefore, there is more evidence to support the alternate hypothesis that there is a significant association between the GDP per capita of the country the company is based in and the funding amount for a company regardless of whether the company is Series C or not. Holding everything else constant, there is a linear positive relationship between GDP per capita and funding amount, both in USD. Moreover, on average, companies in the Series C funding stage receive more funding than those which are not.
 
@@ -118,3 +118,67 @@ However, the models generated don’t provide much practical significance since 
 The conclusion that Series C companies are the preferable funding stage for investors is true for the culture of startups in the United States, but not applicable for all startups worldwide. If we compared the environment for startups between the United States and European countries, we would find that the funding stage that investors prefer will differ (“The 3 Key Differences Between European Vs US Startups Startup Grind” n.d.). In European countries, investors are strong stakeholders in seed and early stage funding, but not as much in the growth stage funding (Series A-C). For every US dollar available for a European startup, there is USD6 for an American startup and this speaks to the difference between Series A funding and Series C (Law 2017). Therefore, European countries are more likely to invest in earlier stage companies due to financial restrictions and capacities. Thus, this potentially requires further investigation in order to get a more significant understanding of how funding amount is allocated to tech companies. Results from such research questions are crucial to help start-ups have an idea of what to expect given the variables being analyzed.
 
 # Appendix
+
+## Summary statistics for key variables
+
+The table above gives us an overview of the range, the median, the interquartile range amongst other statistics of our key variables in our models: funding amount, GDP per capita and whether the company is in the Series C funding stage or not.
+
+## Distribution for key Variables
+
+The above histogram looks at the distribution for GDP per capita before any transformation.
+
+## Standardization vs Logarithmic Transformation
+
+Comparing the two histograms above (left one – standardization; right one - log transformation), we note not much of a difference between the distributions before and after transformations.
+
+## Series C stage or Not Series C stage Distribution
+
+The above histogram looks at the distribution of the binary indicator, whether the tech company is in the Series C funding stage or not.
+
+## Assessing for explanatory
+
+### VIF test – Parallel slopes model
+
+The VIF test above is for our full parallel slopes model. We see that the independent variable, continent the tech company is based in, is the only one with a VIF value of greater than 5, indicating multicollinearity.
+
+### VIF test – Parallel slopes model (subset)
+
+VIF test above is for our subset parallel slopes model (excluding the independent variable, the continent the tech company is based in). All of the variables have VIF values less than 5, indicating little to no multicollinearity.
+
+### Anova test
+
+From the anova test, we note that the p-value is greater than our default significance level which is 0.05. Therefore it is not statistically significant. We fail to reject our null hypothesis stating that adding an additional independent variable will significantly reduce the unexplained variation in our dependent variable.
+
+## Conditions for multiple regression
+
+### Linearity
+
+From the residual plot given, the data points are scattered symmetrically above the 0 horizontal line. Therefore we can assume that the condition for linearity is satisfied.
+
+### Homoskedasticity
+
+From the plot above, the data points are concentrated in a larger cloud on the left side. Therefore, we can assume that the condition for homoskedasticity is not satisfied.
+
+### Normal Distribution of Residuals
+
+From the Q-Q plot above, the data points trail off at the beginning and at the end of the graph. Therefore, we can assume that the condition for normal distribution of residuals is not satisfied.
+
+### Randomness and Independence
+
+We cannot specifically plot graphs to test for randomness and independence. But we do believe that our data sets were collected with these conditions in mind.
+
+## Bibliography
+
+“Financial Development.” n.d. Text/{HTML}. World Bank. Accessed April 2, 2022. https://www. worldbank.org/en/publication/gfdr/gfdr-2016/background/financial-development.
+
+Haddad, Christian, and Lars Hornuf. 2019. “The Emergence of the Global Fintech Market: Economic and Technological Determinants.” Small Business Economics 53 (1): 81–105. https://doi.org/10. 1007/s11187-018-9991-x.
+
+“How the Stock Market Affects GDP.” n.d. Investopedia. Accessed April 2, 2022. https: //www.investopedia.com/ask/answers/033015/how-does-stock-market-affect-gross-domestic- product-gdp.asp.
+
+Law, Ryan. 2017. “The Valley Vs the World: How Startup Funding Varies by Country.” The SaaS Growth Blog. https://medium.com/the-saas-growth-blog/the-valley-vs-the-world-how-startup- funding-varies-by-country-66677b88f7a3.
+
+“LEF 2021 – Liberec Economic Forum.” n.d. Accessed April 2, 2022. http://lef.tul.cz/.
+
+Prochniak, Mariusz, and Katarzyna Wasiak. 2017. “The Impact of the Financial System on Economic Growth in the Context of the Global Crisis: Empirical Evidence for the EU and OECD Countries.” Empirica 44 (2): 295–337. https://doi.org/10.1007/s10663-016-9323-9.
+
+“The 3 Key Differences Between European Vs US Startups Startup Grind.” n.d. Accessed April 2, 2022. https://www.startupgrind.com/blog/the-3-key-differences-between-european-vs-us- startups/.
