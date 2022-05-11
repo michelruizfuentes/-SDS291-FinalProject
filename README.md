@@ -38,6 +38,7 @@ the funding amount.
 # Methods
 
 ```{r setup, include=FALSE}
+#setting parameters
 knitr::opts_chunk$set(fig.width=12, fig.height=8,
                       echo = FALSE,
                       warning = FALSE,
@@ -45,6 +46,7 @@ knitr::opts_chunk$set(fig.width=12, fig.height=8,
 ```
 
 ```{r setup, include=FALSE}
+#loading libraries
 library(tidyverse)
 library(broom)
 library(ggplot2)
