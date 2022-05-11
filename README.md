@@ -37,57 +37,6 @@ the funding amount.
 
 # Methods
 
-```{r setup, include=FALSE}
-#setting parameters
-
-knitr::opts_chunk$set(fig.width=12, fig.height=8,
-                      echo = FALSE,
-                      warning = FALSE,
-                      message = FALSE)
-```
-
-```{r}
-#loading libraries
-
-library(tidyverse)
-library(broom)
-library(ggplot2)
-library(rio)
-library(ggpubr)
-library(moderndive)
-library(car)
-library(stargazer)
-library(vtable)
-```
-
-```{r}
-#loading-the-data
-
-tech_data <- import("tech_fundings.csv")
-world_data <- import("world_data_filtered.csv")
-continent_data <- import("continents.csv")
-```
-
-```{r}
-#wrangling-and-cleaning-data
-
-world_data$Country <- world_data$`Country Name`
-world_data <- world_data %>%
-  full_join(continent_data) %>%
-  mutate(Region = `Country Name`) 
-  
-research_data <- tech_data %>%
-  full_join(world_data, by = "Region") %>%
-  mutate(continent_f = ifelse(Country == "United States", "North America", Continent)) %>%
-  filter(!is.na(`GDP per capita (current US$)`)) %>%
-  filter(!is.na(`Population, total`)) %>%
-  filter(!is.na(index)) %>%
-  filter(!is.na(`Funding Amount (USD)`)) %>%
-  select(!`Country Name`) %>%
-  select(!Continent) %>%
-  drop_na()
-```
-
 ## Data
 
 Our main dataset is Tech Company Fundings. The dataset owner is Shivam Bansal, an experienced data scientist who has won multiple Kaggle Analytics Competitions. They are active on Kaggle with numerous datasets in their toolkit.It consists of 3575 observations with 8 variables looking at different features of the tech company. Out of these 8 variables, we choose to focus on funding amount (key dependent variable), funding stage (key independent variable), vertical (independent variable) and region the company is based in. Its unit of analysis is a unique tech company.
@@ -102,62 +51,11 @@ Backed by the above background and literature analysis, the variables that we ar
 
 1) Funding amount which is our dependent variable with unit USD. It is a continuous variable. When plotting a histogram of this parameter, the distribution is found to be very right skewed.
 
-```{r}
-#dependent-variable
-#https://stackoverflow.com/questions/6386314/how-do-i-get-discrete-factor-levels-to-be-treated-as-continuous
-
-research_data$`funding_amount` <- as.numeric(as.character(research_data$`Funding Amount (USD)`))
-```
-
-
-```{r, fig2, fig.height = 4, fig.width = 6, fig.align = "center"}
-#dependent-variable
-
-research_data %>%
-  ggplot(aes(x = funding_amount)) +
-  geom_histogram() + 
-  labs(
-    title = "Distribution of Funding Amount",
-    subtitle = "Containing all Funding Stages",
-    x = "Funding Amount (in USD)",
-    y = "Count"
-  ) +
-  scale_x_continuous(labels = scales::dollar)
-```
-
 When we plotted the histogram for the funding amount, the highest funding amounts were private equity and unknown and they skewed our distribution significantly. Since private equity is not a funding stage and the unknowns do not bring insights, we can remove these two funding stages from our data without creating bias. This reduced the skewness of the distribution.
-
-```{r, fig3, fig.height = 4, fig.width = 6, fig.align = "center"}
-research_data <- research_data %>%
-  filter(!`Funding Stage` == "Unknown") %>%
-  filter(!`Funding Stage` == "Private Equity") 
-research_data %>%
-  ggplot(aes(x = funding_amount)) +
-  geom_histogram() + 
-  labs(
-    title = "Distribution of Funding Amount",
-    subtitle = "Removing Private Equity and Unknown",
-    x = "Funding Amount (in USD)",
-    y = "Count"
-  ) +
-  scale_x_continuous(labels = scales::dollar)
-```
 
 However, after we removed private equity and unknown data, the data is still skewed. So we will transform funding amount values in an attempt to have a uniform distribution. We used two approaches: standardization and log transformation.
 
 First, we standardized the funding amount because it helps us interpret the intercept in a more sensible way and allows us to look at the funding amount in terms of standard deviation from the mean. Next, we conducted a log transformation of the funding amount to scale the magnitude of our data and transform the data to be more linear.
-
-```{r}
-#standardized-dv
-
-research_data$funding_amt_std <- scale(research_data$funding_amount, center = T, scale = T)
-```
-
-```{r}
-#log-dv
-
-research_data$funding_amt_log <- log(research_data$funding_amount)
-```
 
 After viewing the transformation plots above, we found that there was a more uniform distribution for funding amount in the log transformation thereby having less of a skew and more linear. We did not perform the power transformation because we were satisfied with the uniform distribution for the funding amount produced by the log transformation.
 
