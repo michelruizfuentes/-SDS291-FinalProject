@@ -9,14 +9,6 @@
 
 Our analysis aims to investigate the correlation between the funding stage of a tech startup (Series C or not), the GDP per capita of the country the startup is based in, and the funding amount they receive from a given investor. Our data comes from the WorldBank, a Continents CSV and a Kaggle dataset compiling startup information from TechCrunch, Crunchbase, etc. We combined the datasets to conduct a multiple regression analysis investigating the correlation between the variables listed above for tech startups in North America. This subject is fascinating because startup companies are crucial for the growth of a country’s economy. Our research could provide insightful findings that are relevant to all of us because we benefit from more startups that produce a healthier economy. We find that GDP per capita has a positive linear relationship with funding amounts and companies in Series C have more funding amount than the other funding stage.
 
-## Introduction
-
-Our team is investigating the research question:
-
-How the funding amount a tech company receives is affected by the GDP per capita of the country it is based in and moderated by whether it is in the Series C funding stage or not.
-
-We are assessing the correlation between the funding amount (startups receive from investors) and eco- nomic variables that can reveal trends that help tech startups raise capital and boost the country’s economy. Furthermore, our research could show what economic factors contribute to the likelihood of tech companies receiving funding from investors. We are modeling our data with the intent to: classify, summarize patterns, and test a theory. First, we would like to classify what variables positively correlate with the funding amount that tech startups receive. Then, we will summarize our trends, and lastly, we will test the theory that Series C stage companies are more likely to receive funding from investors.
-
 ```{r setup, include=FALSE}
 #setting parameters
 knitr::opts_chunk$set(fig.width=12, fig.height=8,
@@ -38,6 +30,14 @@ library(stargazer)
 library(vtable)
 ```
 
+## Introduction
+
+Our team is investigating the research question:
+
+How the funding amount a tech company receives is affected by the GDP per capita of the country it is based in and moderated by whether it is in the Series C funding stage or not.
+
+We are assessing the correlation between the funding amount (startups receive from investors) and eco- nomic variables that can reveal trends that help tech startups raise capital and boost the country’s economy. Furthermore, our research could show what economic factors contribute to the likelihood of tech companies receiving funding from investors. We are modeling our data with the intent to: classify, summarize patterns, and test a theory. First, we would like to classify what variables positively correlate with the funding amount that tech startups receive. Then, we will summarize our trends, and lastly, we will test the theory that Series C stage companies are more likely to receive funding from investors.
+
 ## Background and Significance
 
 As ventures or young and growing companies, these startups must gather capital to develop with their ideas. This funding will come from investors like venture capitalists, banks, hedge funds, or high net-worth individuals. The funding amount offered by an investor is based on several factors: their level of interest in the market, the company’s valuation, and what the current funding stage reveals about the startup’s growth potential. Each funding stage possesses distinct characteristics that demonstrate the company’s track record and risk, hence its Valuation score. In our data analysis, we will investigate how the funding stage of a company affects the funding amount they receive from an investor.
@@ -48,13 +48,6 @@ Our second key variable explores whether the GDP per capita of the country the s
 
 As mentioned above, we will investigate the impacts of being a Series C stage company and the GDP per capita of the country the company is based in. We are interested in the relationship between these two factors because established financial markets are often key determinants to providing Series C funding to startup tech companies. Better financial markets would lead to economic growth and, therefore, GDP per capita in the country. Through the tremendous improvements in technology that blossom from the tech startups, there are robust boosts in the economic development of a country (“Financial Development” n.d.). Consequently, since a more stable and stronger financial structure is positively associated with economic growth (Prochniak and Wasiak 2017), holding everything else constant, on average, a company based in a country where the GDP per capita is high is more likely to be associated with being in the Series C funding stage because there would be more funding available for them to invest in.
 
-```{r setup, include=FALSE}
-#loading the data
-tech_data <- import("tech_fundings.csv")
-world_data <- import("world_data_filtered.csv")
-continent_data <- import("continents.csv")
-```
-
 ## Hypothesis
 
 Therefore, our two alternate hypothesis are:
@@ -64,6 +57,32 @@ the funding amount.
 2) We expect that the GDP per capita of the country the startup is based in and funding amount will increase significantly if the startup is in the Series C funding stage.
 
 # Methods
+
+```{r setup, include=FALSE}
+#loading-the-data
+tech_data <- import("tech_fundings.csv")
+world_data <- import("world_data_filtered.csv")
+continent_data <- import("continents.csv")
+```
+
+```{r setup, include=FALSE}
+#wrangling-and-cleaning-data
+world_data$Country <- world_data$`Country Name`
+world_data <- world_data %>%
+  full_join(continent_data) %>%
+  mutate(Region = `Country Name`) 
+  
+research_data <- tech_data %>%
+  full_join(world_data, by = "Region") %>%
+  mutate(continent_f = ifelse(Country == "United States", "North America", Continent)) %>%
+  filter(!is.na(`GDP per capita (current US$)`)) %>%
+  filter(!is.na(`Population, total`)) %>%
+  filter(!is.na(index)) %>%
+  filter(!is.na(`Funding Amount (USD)`)) %>%
+  select(!`Country Name`) %>%
+  select(!Continent) %>%
+  drop_na()
+```
 
 ## Data
 
