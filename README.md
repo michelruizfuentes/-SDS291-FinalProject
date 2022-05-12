@@ -2,7 +2,7 @@
 
 - Nana Adjoa Ansah, Parunjodhi Munisamy, Michel Ruiz-Fuentes
 - SDS291 Multiple Regression
-- Tuesday May 3, 2022
+- 3 May 2022
 
 ## Abstract
 
