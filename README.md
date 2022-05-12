@@ -5,11 +5,12 @@ Group Project Authors
 - Parunjodhi Munisamy
 - Michel Ruiz-Fuentes
 
-Course
+Course and Instructor
 - SDS291 Multiple Regression
+- Professor LaCombe
 
-Date
-- 3 May 2022
+Submission Date
+- Tuesday May 3, 2022
 
 ## Abstract
 
