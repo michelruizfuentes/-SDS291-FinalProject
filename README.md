@@ -1,15 +1,7 @@
 # Assessing the Impacts of Economic Factors on Funding for Tech Startups in North America
 
-Group Project Authors
-- Nana Adjoa Ansah
-- Parunjodhi Munisamy
-- Michel Ruiz-Fuentes
-
-Course and Instructor
+- Nana Adjoa Ansah, Parunjodhi Munisamy, Michel Ruiz-Fuentes
 - SDS291 Multiple Regression
-- Professor LaCombe
-
-Submission Date
 - Tuesday May 3, 2022
 
 ## Abstract
